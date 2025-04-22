@@ -1,5 +1,3 @@
-# import matplotlib
-# matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
@@ -180,9 +178,9 @@ def build_global_statistics(lojas_data: dict) -> dict:
     lojas_sales_distribution = {loja_name: loja_data['sales_distribution'] for loja_name, loja_data in lojas_data.items()}
 
     # Create dataframes
-    lojas_revenues_df = pd.Series(lojas_revenues, name='Revenue')
-    lojas_rating_mean_df = pd.Series(lojas_rating_mean, name='Rating mean')
-    lojas_shipping_mean_df = pd.Series(lojas_shipping_mean , name='Shipping mean')
+    lojas_revenues_df = pd.Series(lojas_revenues, name='Faturamento')
+    lojas_rating_mean_df = pd.Series(lojas_rating_mean, name='Média Avaliações')
+    lojas_shipping_mean_df = pd.Series(lojas_shipping_mean , name='Frete Médio')
 
     lojas_stats = pd.concat([lojas_revenues_df, lojas_rating_mean_df, lojas_shipping_mean_df], axis=1)
     lojas_categories_ranking_df = pd.DataFrame(lojas_categories_ranking)
@@ -193,7 +191,7 @@ def build_global_statistics(lojas_data: dict) -> dict:
     lojas_sales_distribution_df['TOTAL'] = lojas_sales_distribution_df.sum(axis=1)
     
     # Sort the dataframes
-    lojas_stats.sort_values(by='Revenue', ascending=False, inplace=True)
+    lojas_stats.sort_values(by='Faturamento', ascending=False, inplace=True)
     lojas_categories_ranking_df.sort_values(by='TOTAL', ascending=False, inplace=True)
     lojas_products_ranking_df.sort_values(by='TOTAL', ascending=False, inplace=True)
     lojas_sales_distribution_df.sort_values(by='TOTAL', ascending=False, inplace=True)
@@ -254,7 +252,7 @@ def get_top10_products_and_shipping_mean(
     ]
     top10_products_shipping_mean = pd.concat(store_frete_dfs, axis=1)
     top10_products_shipping_mean.columns = ['Loja 1', 'Loja 2', 'Loja 3', 'Loja 4']
-    top10_products_shipping_mean.loc['Média Global'] = lojas_comparisons['lojas_stats']['Shipping mean']
+    top10_products_shipping_mean.loc['Média Global'] = lojas_comparisons['lojas_stats']['Frete Médio']
     top10_products_shipping_mean.title = 'Média de Frete por Produto'
 
     # Order by top 10 selling products
@@ -365,13 +363,13 @@ filtered_top10_shipping = lojas_top10_products_shipping_mean.T.loc[selected_loja
 # 
 # Revenue pie chart
 fig_revenue, ax_revenue = plt.subplots()
-ax_revenue.pie(lojas_stats['Revenue'], explode=(0.07, 0, 0, 0), labels=lojas_stats.index, autopct='%1.1f%%',
+ax_revenue.pie(lojas_stats['Faturamento'], explode=(0.07, 0, 0, 0), labels=lojas_stats.index, autopct='%1.1f%%',
        shadow=True, startangle=90)
 ax_revenue.set_title('Faturamento por Loja')
 
 # Rating mean chart
 fig_ratings, ax_ratings = plt.subplots(figsize=(6,3))
-lojas_stats['Rating mean'].plot(ax=ax_ratings, label='Avaliação Média')
+lojas_stats['Média Avaliações'].plot(ax=ax_ratings, label='Avaliação Média')
 plt.title('Média de Avaliações', fontsize=16)
 plt.ylabel('Avaliação Média', fontsize=14)
 plt.xlabel('Lojas', fontsize=14)
@@ -382,7 +380,7 @@ plt.tight_layout()
 # Shipping mean bar chart
 bar_colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
 fig_shippings, ax_shippings = plt.subplots(figsize=(6,3))
-lojas_stats['Shipping mean'].plot(kind='bar', ax=ax_shippings, color=bar_colors, label='Frete Médio')
+lojas_stats['Frete Médio'].plot(kind='bar', ax=ax_shippings, color=bar_colors, label='Frete Médio')
 ax_shippings.set_ylim(bottom=30)
 plt.title('Custo de Frete Médio', fontsize=16)
 plt.ylabel('Frete Médio (R$)', fontsize=14)
