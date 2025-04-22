@@ -16,6 +16,16 @@ from app_ui import streamlit_header, sidebar_credits, final_report
 # Main code
 # # #
 
+# Initializing Streamlit app
+# 
+# Set page config
+st.set_page_config(
+    page_title="Alura Store",
+    page_icon="🧊",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
 # Importing and pre processing the data
 links = [f"./base-de-dados-challenge-1/loja_{i}.csv" for i in range(1, 5)]
 lojas_pre_processed = [load_data(link) for link in links]
@@ -35,16 +45,8 @@ lojas_products = lojas_comparisons['lojas_products_ranking']
 lojas_top10_products_shipping_mean = lojas_comparisons['top10_products_shipping_mean']
 lojas_sales_distribution = lojas_comparisons['lojas_sales_distribution']
 
-# Initializing a Streamlit app
+# Setup Streamlit layout
 # 
-# Set page config
-st.set_page_config(
-    page_title="Alura Store",
-    page_icon="🧊",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
-
 # Create header section
 st.markdown(streamlit_header, unsafe_allow_html=True)
 
