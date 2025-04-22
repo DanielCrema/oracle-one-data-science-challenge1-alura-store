@@ -110,6 +110,7 @@ def build_global_statistics(lojas_data: dict) -> dict:
 
     # Format dataframes
     lojas_stats = lojas_stats.round(2)
+    lojas_categories_ranking_df.index = lojas_categories_ranking_df.index.str.capitalize()
     lojas_sales_distribution_df.dropna(inplace=True)
     cols_to_convert = ['loja1', 'loja2', 'loja3', 'loja4', 'TOTAL']
     lojas_sales_distribution_df[cols_to_convert] = lojas_sales_distribution_df[cols_to_convert].astype(int)
