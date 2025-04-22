@@ -2,12 +2,14 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "./")))
 
+import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
 import seaborn as sns
 from modules.loader import load_data
 from modules.analyze_stores import analyze_data
 from modules.build_statistics import build_global_statistics, get_top10_products_and_shipping_mean
+from utils.plot_horizontal_bar import plot_horizontal_bar
 from app_ui import streamlit_header, sidebar_credits, final_report
 
 # # #
@@ -15,31 +17,16 @@ from app_ui import streamlit_header, sidebar_credits, final_report
 # # #
 
 # Importing and pre processing the data
-link = "./base-de-dados-challenge-1/loja_1.csv"
-link2 = "./base-de-dados-challenge-1/loja_2.csv"
-link3 = "./base-de-dados-challenge-1/loja_3.csv"
-link4 = "./base-de-dados-challenge-1/loja_4.csv"
-
-loja1 = load_data(link)
-loja2 = load_data(link2)
-loja3 = load_data(link3)
-loja4 = load_data(link4)
+links = [f"./base-de-dados-challenge-1/loja_{i}.csv" for i in range(1, 5)]
+lojas_pre_processed = [load_data(link) for link in links]
 
 # Analyzing the data
-loja1_data = analyze_data(loja1)
-loja2_data = analyze_data(loja2)
-loja3_data = analyze_data(loja3)
-loja4_data = analyze_data(loja4)
-lojas_data = {
-    'loja1': loja1_data,
-    'loja2': loja2_data,
-    'loja3': loja3_data,
-    'loja4': loja4_data
-}
+lojas_analyzed = [analyze_data(loja) for loja in lojas_pre_processed]
+lojas_data = {f'loja{i+1}': data for i, data in enumerate(lojas_analyzed)}
 
 # Generating global statistical data
 lojas_comparisons = build_global_statistics(lojas_data)
-lojas_comparisons = get_top10_products_and_shipping_mean(lojas_comparisons, loja1, loja2, loja3, loja4)
+lojas_comparisons = get_top10_products_and_shipping_mean(lojas_comparisons, lojas_pre_processed[0], lojas_pre_processed[1], lojas_pre_processed[2], lojas_pre_processed[3])
 
 # Unpacking the data
 lojas_stats = lojas_comparisons['lojas_stats']
@@ -140,49 +127,10 @@ plt.tight_layout()
 # Specifics
 # 
 # Top 10 categories horizontal bars chart
-top10_categories = filtered_categories.T
-fig_top10_categories, ax_top10_categories = plt.subplots(figsize=(9.5,10))
-top10_categories.plot(kind='barh', ax=ax_top10_categories)
-ax_top10_categories.invert_yaxis()
-ax_top10_categories.set_xlim(left=150)
-ax_top10_categories.tick_params(axis='y', labelsize=16)
-ax_top10_categories.legend(fontsize=12, title="Lojas", title_fontsize=16)
-ax_top10_categories.set_yticklabels(
-    [
-        'Instrum. musicais' if label.get_text().lower() == 'instrumentos musicais'
-        else 'Util. domésticas' if label.get_text().lower() == 'utilidades domesticas'
-        else label.get_text().capitalize()
-        for label in ax_top10_categories.get_yticklabels()
-    ],
-    fontsize=16
-)
-plt.title('Top 10 Categorias mais vendidas\n(Ordem Decrescente)', fontsize=24)
-plt.xlabel('Quantidade Vendida', fontsize=22)
-plt.ylabel('Categoria', fontsize=22)
-plt.yticks(rotation=35)
-plt.tight_layout()
+fig_top10_categories = plot_horizontal_bar(filtered_categories.T, 'Top 10 Categorias mais vendidas\n(Ordem Decrescente)', 'Quantidade Vendida', 'Categorias', 150)
 
 # Top 10 products horizontal bars chart
-top10_products = filtered_products.T
-fig_top10_products, ax_top10_products = plt.subplots(figsize=(9.5,10))
-top10_products.plot(kind='barh', ax=ax_top10_products)
-ax_top10_products.invert_yaxis()
-ax_top10_products.set_xlim(left=33)
-ax_top10_products.tick_params(axis='x', labelsize=16)
-ax_top10_products.legend(fontsize=12, title="Lojas", title_fontsize=16)
-ax_top10_products.set_yticklabels(
-    [
-        'Carrinho cont. remoto' if label.get_text().lower() == 'carrinho controle remoto'
-        else label.get_text().capitalize()
-        for label in ax_top10_products.get_yticklabels()
-    ],
-    fontsize=15
-)
-plt.title('Top 10 Produtos mais vendidos\n(Ordem Decrescente)', fontsize=24)
-plt.xlabel('Quantidade Vendida', fontsize=22)
-plt.ylabel('Produto', fontsize=22)
-plt.yticks(rotation=35)
-plt.tight_layout()
+fig_top10_products = plot_horizontal_bar(filtered_products.T, 'Top 10 Produtos mais vendidos\n(Ordem Decrescente)', 'Quantidade Vendida', 'Produtos', 33)
 
 # Shipping mean compared to products shipping mean heatmap
 data = filtered_top10_shipping.T
