@@ -10,6 +10,7 @@ from modules.loader import load_data
 from modules.analyze_stores import analyze_data
 from modules.build_statistics import build_global_statistics, get_top10_products_and_shipping_mean
 from utils.plot_horizontal_bar import plot_horizontal_bar
+from utils.generate_downloadable_zip import zip_files
 from app_ui import streamlit_header, sidebar_credits, final_report
 
 # # #
@@ -177,61 +178,32 @@ col6.pyplot(fig_top10_shipping)
 # Raw data section
 # 
 st.markdown("""<a name="raw-data"></a><h1 style="font-size: 2rem; letter-spacing: 0.04rem; margin-bottom: 0.5rem">🗿 Dados Brutos</h1>""", unsafe_allow_html=True)
-st.subheader("Estatísticas Globais")
-st.dataframe(lojas_stats.T, use_container_width=True)
+with st.expander('Ver Dados Brutos', expanded=False):
+    st.subheader("Estatísticas Globais")
+    st.dataframe(lojas_stats.T, use_container_width=True)
 
-st.subheader("Categorias mais Vendidas")
-st.dataframe(lojas_categories, use_container_width=True)
+    st.subheader("Categorias mais Vendidas")
+    st.dataframe(lojas_categories, use_container_width=True)
 
-st.subheader("Produtos mais Vendidos")
-st.dataframe(lojas_products, use_container_width=True)
+    st.subheader("Produtos mais Vendidos")
+    st.dataframe(lojas_products, use_container_width=True)
 
-st.subheader("Top 10 Produtos - Frete Médio")
-st.dataframe(lojas_top10_products_shipping_mean, use_container_width=True)
+    st.subheader("Top 10 Produtos - Frete Médio")
+    st.dataframe(lojas_top10_products_shipping_mean, use_container_width=True)
 
-st.subheader("Distribuição Geográfica de Vendas")
-st.dataframe(lojas_sales_distribution, use_container_width=True)
+    st.subheader("Distribuição Geográfica de Vendas")
+    st.dataframe(lojas_sales_distribution, use_container_width=True)
 
 # Download data section
 # 
 st.markdown("""<a name="download-data"></a><h1 style="font-size: 2rem; letter-spacing: 0.04rem; margin-bottom: 0.5rem">⬇️ Download dos Dados</h1>""", unsafe_allow_html=True)
 
-def convert_df_to_csv(df):
-    return df.to_csv(index=True).encode('utf-8')
-
+zip_buffer = zip_files(lojas_comparisons)
 st.download_button(
-    label="📥 Baixar Estatísticas Globais (CSV)",
-    data=convert_df_to_csv(lojas_stats.T),
-    file_name='estatisticas_globais.csv',
-    mime='text/csv',
-)
-
-st.download_button(
-    label="📥 Baixar Categorias mais Vendidas (CSV)",
-    data=convert_df_to_csv(lojas_categories),
-    file_name='categorias_mais_vendidas.csv',
-    mime='text/csv',
-)
-
-st.download_button(
-    label="📥 Baixar Produtos mais Vendidos (CSV)",
-    data=convert_df_to_csv(lojas_products),
-    file_name='produtos_mais_vendidos.csv',
-    mime='text/csv',
-)
-
-st.download_button(
-    label="📥 Baixar Frete Médio por Produto (CSV)",
-    data=convert_df_to_csv(lojas_top10_products_shipping_mean),
-    file_name='frete_medio_por_produto.csv',
-    mime='text/csv',
-)
-
-st.download_button(
-    label="📥 Baixar Distribuição Geográfica de Vendas (CSV)",
-    data=convert_df_to_csv(lojas_sales_distribution),
-    file_name='distribuicao_geografica_vendas.csv',
-    mime='text/csv',
+    label="📦 Baixar Todos os Arquivos (ZIP)",
+    data=zip_buffer,
+    file_name="estatísticas-alurastore.zip",
+    mime="application/zip"
 )
 
 # Final report section
