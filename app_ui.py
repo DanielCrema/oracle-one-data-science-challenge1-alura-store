@@ -32,11 +32,11 @@ sidebar_credits = """<div style="display: flex; flex-direction: column; gap: 14p
         <p style="font-size: 14px; margin: 0">Daniel Crema</p>
     </div>
     <div>
-        <img src="https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/linkedin/linkedin-original.svg" style="width: 20px; margin-right: 10px"/>
+        <img src="https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/linkedin/linkedin-original.svg" alt="logo" style="width: 20px; margin-right: 10px; font-size: 10px"/>
         <a href="https://www.linkedin.com/in/daniel-crema-dev/" target="_blank">LinkedIn</a>
     </div>
     <div>
-        <img src="https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/github/github-original.svg" style="width: 22px; margin-right: 10px"/>
+        <img src="https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/github/github-original.svg" alt="logo" style="width: 22px; margin-right: 10px; font-size: 10px"/>
         <a href="https://github.com/DanielCrema" target="_blank">Github</a>
     </div>
     <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px">
@@ -44,9 +44,10 @@ sidebar_credits = """<div style="display: flex; flex-direction: column; gap: 14p
         <a href="https://www.oracle.com/br/education/oracle-next-education/" target="_blank">ONE - Oracle Next Education</a>
         <a href="https://www.oracle.com/" target="_blank">Oracle</a>
         <a href="https://www.alura.com.br/" target="_blank">Alura</a>
-        <img src="https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/oracle/oracle-original.svg" style="width: 60px; margin-right: 10px"/>
+        <img src="https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/oracle/oracle-original.svg" alt="logo-oracle" style="width: 70px; font-size: 10px"/>
     </div>
 </div>
+        <img src="https://moebius78.github.io/moebius78-sprint03-aluraONE.github.io/assets/Oracle_Alura.png" alt="logo-oracle-alura-latam" style="width: 115px; background: #FCFCFC; color: #333; font-size: 10px; padding: 2px 3px"/>
 """
 
 final_report = """
