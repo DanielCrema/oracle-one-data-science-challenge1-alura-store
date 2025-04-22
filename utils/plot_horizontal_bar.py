@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from rename_label import rename_label
+from utils.rename_label import rename_label
 
 def plot_horizontal_bar(df: pd.DataFrame, title: str, xlabel: str, ylabel: str, xlim_left: int, color: str=None) -> plt.Figure:
     '''
