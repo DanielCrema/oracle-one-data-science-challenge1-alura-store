@@ -26,6 +26,29 @@ streamlit_header = """<a name="alura-store-statistics"></a><div style="text-alig
     </div>
 </div>"""
 
+sidebar_credits = """<div style="display: flex; flex-direction: column; gap: 14px; margin-top: 5px">
+    <div>
+        <p style="font-size: 14px; margin: 0">Desenvolvido por:</p>
+        <p style="font-size: 14px; margin: 0">Daniel Crema</p>
+    </div>
+    <div>
+        <img src="https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/linkedin/linkedin-original.svg" style="width: 20px; margin-right: 10px"/>
+        <a href="https://www.linkedin.com/in/daniel-crema-dev/" target="_blank">LinkedIn</a>
+    </div>
+    <div>
+        <img src="https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/github/github-original.svg" style="width: 22px; margin-right: 10px"/>
+        <a href="https://github.com/DanielCrema" target="_blank">Github</a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px">
+        <p style="font-size: 14px; margin: 0">Agradecimentos:</p>
+        <a href="https://www.oracle.com/br/education/oracle-next-education/" target="_blank">ONE - Oracle Next Education</a>
+        <a href="https://www.oracle.com/" target="_blank">Oracle</a>
+        <a href="https://www.alura.com.br/" target="_blank">Alura</a>
+        <img src="https://raw.githubusercontent.com/devicons/devicon/ca28c779441053191ff11710fe24a9e6c23690d6/icons/oracle/oracle-original.svg" style="width: 60px; margin-right: 10px"/>
+    </div>
+</div>
+"""
+
 final_report = """
             O Sr. João, proprietário das lojas Alura Store, precisa vender uma de suas lojas para apriorar a sua eficiência em custos e obter melhores resultados.
             

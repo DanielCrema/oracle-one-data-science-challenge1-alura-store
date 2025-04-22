@@ -8,7 +8,7 @@ import seaborn as sns
 from modules.loader import load_data
 from modules.analyze_stores import analyze_data
 from modules.build_statistics import build_global_statistics, get_top10_products_and_shipping_mean
-from app_ui import streamlit_header, final_report
+from app_ui import streamlit_header, sidebar_credits, final_report
 
 # # #
 # Main code
@@ -79,11 +79,16 @@ st.sidebar.markdown("""
 - [Dados Brutos](#raw-data)
 - [Baixar Dados (CSV)](#download-data)
 - [Relatório Final](#final-report)
+<hr/>
 """, unsafe_allow_html=True)
 # Filter the data based on selection
 filtered_categories = lojas_categories.T.loc[selected_lojas]
 filtered_products = lojas_products.head(10).T.loc[selected_lojas]
 filtered_top10_shipping = lojas_top10_products_shipping_mean.T.loc[selected_lojas]
+
+# Create credits section
+st.sidebar.markdown("""### 🎓 Créditos""")
+st.sidebar.markdown(sidebar_credits, unsafe_allow_html=True)
 
 # Generating the charts
 # # #
