@@ -1,5 +1,7 @@
 import pandas as pd
+import streamlit as st
 
+@st.cache_data
 def analyze_data(loja: pd.DataFrame) -> dict:
     """
     📊 **Function Description:**

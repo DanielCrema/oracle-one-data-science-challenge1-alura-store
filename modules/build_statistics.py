@@ -1,5 +1,7 @@
 import pandas as pd
+import streamlit as st
 
+@st.cache_data
 def build_global_statistics(lojas_data: dict) -> dict:
     """
     🔄 **Function Description:**
@@ -121,6 +123,7 @@ def build_global_statistics(lojas_data: dict) -> dict:
 
     return lojas_comparisons
 
+@st.cache_data
 def get_top10_products_and_shipping_mean(
         lojas_comparisons: dict,
         loja1: pd.DataFrame,

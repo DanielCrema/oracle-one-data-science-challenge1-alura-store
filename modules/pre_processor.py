@@ -1,5 +1,7 @@
 import pandas as pd
+import streamlit as st
 
+@st.cache_data
 def pre_process(loja: pd.DataFrame) -> pd.DataFrame:
     """
     🧼 **Function Description:**
