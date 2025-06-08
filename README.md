@@ -88,8 +88,8 @@ This project features an **organized modular structure** for data processing and
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/DanielCrema/oracle-one-data-science-challenge1-alura-store.git
+cd oracle-one-data-science-challenge1-alura-store
 ```
 
 2. Install the requirements:
